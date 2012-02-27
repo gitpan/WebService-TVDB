@@ -1,0 +1,60 @@
+{
+   "abstract" : "Interface to http://thetvdb.com/",
+   "author" : [
+      "Andrew Jones <andrew@arjones.co.uk>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "WebService-TVDB",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Archive::Zip" : 0,
+            "Exporter" : 0,
+            "File::HomeDir" : 0,
+            "File::Temp" : 0,
+            "LWP::Simple" : 0,
+            "Object::Tiny" : 0,
+            "XML::Simple" : 0,
+            "constant" : 0,
+            "strict" : 0,
+            "warnings" : 0
+         }
+      },
+      "test" : {
+         "requires" : {
+            "English" : 0,
+            "FindBin" : 0,
+            "Net::Ping" : 0,
+            "Test::Exception" : 0,
+            "Test::More" : "0.88"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/andrewrjones/perl5-Net-TVDB/issues"
+      },
+      "homepage" : "https://github.com/andrewrjones/perl5-Net-TVDB",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/andrewrjones/perl5-Net-TVDB.git",
+         "web" : "https://github.com/andrewrjones/perl5-Net-TVDB"
+      }
+   },
+   "version" : "1.120580"
+}
+
