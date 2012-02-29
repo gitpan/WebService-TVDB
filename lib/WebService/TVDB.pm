@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB;
 {
-  $WebService::TVDB::VERSION = '1.120580';
+  $WebService::TVDB::VERSION = '1.120600';
 }
 
 # ABSTRACT: Interface to http://thetvdb.com/
@@ -125,7 +125,7 @@ WebService::TVDB - Interface to http://thetvdb.com/
 
 =head1 VERSION
 
-version 1.120580
+version 1.120600
 
 =head1 SYNOPSIS
 

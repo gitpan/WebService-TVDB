@@ -32,4 +32,4 @@ resources:
   bugtracker: https://github.com/andrewrjones/perl5-Net-TVDB/issues
   homepage: https://github.com/andrewrjones/perl5-Net-TVDB
   repository: https://github.com/andrewrjones/perl5-Net-TVDB.git
-version: 1.120580
+version: 1.120600

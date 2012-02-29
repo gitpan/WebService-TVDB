@@ -1,6 +1,6 @@
 package WebService::TVDB::Languages;
 {
-  $WebService::TVDB::Languages::VERSION = '1.120580';
+  $WebService::TVDB::Languages::VERSION = '1.120600';
 }
 
 use strict;
@@ -146,7 +146,7 @@ WebService::TVDB::Languages - A list of languages supported by thetvdb.com
 
 =head1 VERSION
 
-version 1.120580
+version 1.120600
 
 =head1 SYNOPSIS
 

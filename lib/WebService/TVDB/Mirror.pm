@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Mirror;
 {
-  $WebService::TVDB::Mirror::VERSION = '1.120580';
+  $WebService::TVDB::Mirror::VERSION = '1.120600';
 }
 
 # ABSTRACT: Gets and saves a mirror
@@ -60,7 +60,7 @@ WebService::TVDB::Mirror - Gets and saves a mirror
 
 =head1 VERSION
 
-version 1.120580
+version 1.120600
 
 =head1 SYNOPSIS
 
