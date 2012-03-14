@@ -37,7 +37,7 @@
          "requires" : {
             "English" : 0,
             "FindBin" : 0,
-            "Net::Ping" : 0,
+            "Net::Ping" : "2.33",
             "Test::Exception" : 0,
             "Test::More" : "0.88"
          }
@@ -55,6 +55,6 @@
          "web" : "https://github.com/andrewrjones/perl5-Net-TVDB"
       }
    },
-   "version" : "1.120600"
+   "version" : "1.120740"
 }
 

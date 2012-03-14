@@ -1,6 +1,6 @@
 package WebService::TVDB::Util;
 {
-  $WebService::TVDB::Util::VERSION = '1.120600';
+  $WebService::TVDB::Util::VERSION = '1.120740';
 }
 
 use strict;
@@ -9,8 +9,9 @@ use warnings;
 # ABSTRACT: Utility functions
 
 require Exporter;
-our @ISA       = qw(Exporter);
-our @EXPORT_OK = qw(pipes_to_array);
+our @ISA         = qw(Exporter);
+our @EXPORT_OK   = qw(pipes_to_array get_api_key_from_file);
+our %EXPORT_TAGS = ( all => \@EXPORT_OK );
 
 sub pipes_to_array {
     my $string = shift;
@@ -25,6 +26,22 @@ sub pipes_to_array {
     return \@array;
 }
 
+sub get_api_key_from_file {
+    my ($file) = @_;
+
+    return do {
+        local $/ = undef;
+        open my $fh, "<", $file
+          or die "could not open $file: $!";
+        my $doc = <$fh>;
+
+        # ensure there are no carriage returns
+        $doc =~ s/(\r|\n)//g;
+
+        return $doc;
+    };
+}
+
 
 
 =pod
@@ -35,7 +52,7 @@ WebService::TVDB::Util - Utility functions
 
 =head1 VERSION
 
-version 1.120600
+version 1.120740
 
 =head1 SYNOPSIS
 
@@ -46,6 +63,10 @@ version 1.120600
 =head2 pipes_to_array($string)
 
 Takes a string such as "|Comedy|Action|" and returns an array without the pipes.
+
+=head2 get_api_key_from_file($file)
+
+Slurps the api_key from file
 
 =head1 AUTHOR
 
