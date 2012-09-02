@@ -1,6 +1,6 @@
 package WebService::TVDB::Languages;
 {
-  $WebService::TVDB::Languages::VERSION = '1.120740';
+  $WebService::TVDB::Languages::VERSION = '1.122460';
 }
 
 use strict;
@@ -144,7 +144,7 @@ WebService::TVDB::Languages - A list of languages supported by thetvdb.com
 
 =head1 VERSION
 
-version 1.120740
+version 1.122460
 
 =head1 SYNOPSIS
 
@@ -152,7 +152,7 @@ version 1.120740
 
 =head1 DESCRIPTION
 
-This contains all the languages supported by http://thetvdb.com as of 2012-03-14.
+This contains all the languages supported by http://thetvdb.com as of 2012-09-02.
 
 They are as follows:
 
@@ -251,6 +251,8 @@ Dansk
 中文
 
 =back
+
+=encoding utf-8
 
 =head1 AUTHOR
 

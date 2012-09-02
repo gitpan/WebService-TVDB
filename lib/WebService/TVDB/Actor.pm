@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Actor;
 {
-  $WebService::TVDB::Actor::VERSION = '1.120740';
+  $WebService::TVDB::Actor::VERSION = '1.122460';
 }
 
 # ABSTRACT: Represents an Actor
@@ -30,7 +30,7 @@ WebService::TVDB::Actor - Represents an Actor
 
 =head1 VERSION
 
-version 1.120740
+version 1.122460
 
 =head1 ATTRIBUTES
 

@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB;
 {
-  $WebService::TVDB::VERSION = '1.120740';
+  $WebService::TVDB::VERSION = '1.122460';
 }
 
 # ABSTRACT: Interface to http://thetvdb.com/
@@ -13,7 +13,9 @@ use WebService::TVDB::Series;
 use WebService::TVDB::Mirror;
 use WebService::TVDB::Util qw(get_api_key_from_file);
 
+use Carp qw(carp);
 use LWP::Simple ();
+use URI::Escape qw(uri_escape);
 use XML::Simple qw(:strict);
 
 use constant SEARCH_URL =>
@@ -24,6 +26,7 @@ use constant API_KEY_FILE => '/.tvdb';
 use Object::Tiny qw(
   api_key
   language
+  max_retries
 );
 
 sub new {
@@ -41,6 +44,10 @@ sub new {
         $self->{language} = 'English';
     }
 
+    unless ( $self->max_retries ) {
+        $self->{max_retries} = 10;
+    }
+
     return $self;
 }
 
@@ -51,19 +58,35 @@ sub search {
         die 'search term is required';
     }
     unless ( $self->{mirrors} ) {
-        $self->_load_mirros();
+        $self->_load_mirrors();
     }
 
-    my $xml = LWP::Simple::get( sprintf( SEARCH_URL, $term ) );
+    my $url     = sprintf( SEARCH_URL, uri_escape($term) );
+    my $xml     = LWP::Simple::get($url);
+    my $retries = 0;
+    until ( defined $xml || $retries == $self->max_retries ) {
+        carp "failed get URL $url - retrying";
+
+        # TODO configurable wait time
+        sleep 1;
+        $xml = LWP::Simple::get($url);
+
+        $retries++;
+    }
+    unless ($xml) {
+        die "failed to get URL $url after $retries retries. Aborting.";
+    }
     $self->{series} = _parse_series(
         XML::Simple::XMLin(
             $xml,
-            ForceArray => ['Series'],
-            KeyAttr    => 'Series'
+            ForceArray    => ['Series'],
+            KeyAttr       => 'Series',
+            SuppressEmpty => 1
         ),
         $self->api_key,
         $languages->{ $self->language },
-        $self->{mirrors}
+        $self->{mirrors},
+        $self->max_retries
     );
 
     return $self->{series};
@@ -71,7 +94,7 @@ sub search {
 
 # parse the series xml and return an array of WebService::TVDB::Series
 sub _parse_series {
-    my ( $xml, $api_key, $api_language, $api_mirrors ) = @_;
+    my ( $xml, $api_key, $api_language, $api_mirrors, $max_retries ) = @_;
 
     # loop over results and create new series objects
     my @series;
@@ -81,7 +104,8 @@ sub _parse_series {
             %$_,
             _api_key      => $api_key,
             _api_language => $api_language,
-            _api_mirrors  => $api_mirrors
+            _api_mirrors  => $api_mirrors,
+            _max_retries  => $max_retries
           );
     }
 
@@ -89,7 +113,7 @@ sub _parse_series {
 }
 
 # loads mirros when needed
-sub _load_mirros {
+sub _load_mirrors {
     my ($self) = @_;
 
     my $mirrors = WebService::TVDB::Mirror->new();
@@ -109,11 +133,11 @@ WebService::TVDB - Interface to http://thetvdb.com/
 
 =head1 VERSION
 
-version 1.120740
+version 1.122460
 
 =head1 SYNOPSIS
 
-  my $tvdb = WebService::TVDB->new(api_key => 'ABC123', language => 'English');
+  my $tvdb = WebService::TVDB->new(api_key => 'ABC123', language => 'English', max_retries => 10);
 
   my $series_list = $tvdb->search('men behaving badly');
 
@@ -165,6 +189,10 @@ This is your API key. If not passed in here, we will look in ~/.tvdb. Otherwise 
 =item language
 
 The language you want tour results in. L<See WebService::TVDB::Languages> for a list of languages. Defaults to English.
+
+=item max_retries
+
+The amount of times we will try to get the series if our call to the URL failes. Defaults to 10.
 
 =back
 

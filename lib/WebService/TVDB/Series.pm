@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Series;
 {
-  $WebService::TVDB::Series::VERSION = '1.120740';
+  $WebService::TVDB::Series::VERSION = '1.122460';
 }
 
 # ABSTRACT: Represents a TV Series
@@ -13,7 +13,10 @@ use WebService::TVDB::Banner;
 use WebService::TVDB::Episode;
 use WebService::TVDB::Util qw(pipes_to_array);
 
-use File::Temp ();
+use Carp qw(carp);
+use File::Homedir ();
+use File::Basename qw(dirname);
+use File::Path qw(mkpath);
 use Archive::Zip qw( :ERROR_CODES :CONSTANTS );
 use LWP::Simple ();
 use XML::Simple qw(:strict);
@@ -61,10 +64,14 @@ use Object::Tiny qw(
   _api_key
   _api_language
   _api_mirrors
+  _max_retries
 );
 
 # the url for full series data
 use constant URL => '%s/api/%s/series/%s/all/%s.zip';
+
+# the local path for full series data
+use constant CACHE_PATH => '%s/.tvdbcache/series/%s/all/%s.zip';
 
 # xml files in the zip
 use constant ACTORS_XML_FILE  => 'actors.xml';
@@ -73,19 +80,32 @@ use constant BANNERS_XML_FILE => 'banners.xml';
 sub fetch {
     my ($self) = @_;
 
+    my $url        = $self->_url;
+    my $cache_path = $self->_cache_path;
+    my $dir        = dirname($cache_path);
+    -e $dir or mkpath($dir) or die 'could not create ' . $dir;
+
     # get the zip
-    my $temp = File::Temp->new();
-    unless (
-        LWP::Simple::is_success(
-            LWP::Simple::getstore( $self->_url, $temp->filename )
-        )
-      )
+    my $res = LWP::Simple::mirror( $url, $cache_path );
+    my $retries = 0;
+    until (  $res == LWP::Simple::RC_NOT_MODIFIED
+          || LWP::Simple::is_success($res)
+          || $retries == $self->_max_retries )
     {
-        die 'could not get zip file at ' . $self->_url;
+        carp "failed get URL $url - retrying";
+
+        # TODO configurable wait time
+        sleep 1;
+        $res = LWP::Simple::mirror( $url, $cache_path );
+
+        $retries++;
+    }
+    if ( $retries == $self->_max_retries ) {
+        die "failed to get URL $url after $retries retries. Aborting.";
     }
     my $zip = Archive::Zip->new();
-    unless ( $zip->read( $temp->filename ) == AZ_OK ) {
-        die 'could not read zip at ' . $temp->filename;
+    unless ( $zip->read($cache_path) == AZ_OK ) {
+        die 'could not read zip at ' . $cache_path;
     }
 
     # parse the xml files
@@ -100,8 +120,9 @@ sub fetch {
     }
     $parsed_xml = XML::Simple::XMLin(
         $xml,
-        ForceArray => ['Data'],
-        KeyAttr    => 'Data'
+        ForceArray    => ['Data'],
+        KeyAttr       => 'Data',
+        SuppressEmpty => 1
     );
     $self->_parse_series_data($parsed_xml);
 
@@ -111,8 +132,9 @@ sub fetch {
     }
     $parsed_xml = XML::Simple::XMLin(
         $xml,
-        ForceArray => ['Actor'],
-        KeyAttr    => 'Actor'
+        ForceArray    => ['Actor'],
+        KeyAttr       => 'Actor',
+        SuppressEmpty => 1
     );
     $self->_parse_actors($parsed_xml);
 
@@ -122,8 +144,9 @@ sub fetch {
     }
     $parsed_xml = XML::Simple::XMLin(
         $xml,
-        ForceArray => ['Banner'],
-        KeyAttr    => 'Banner'
+        ForceArray    => ['Banner'],
+        KeyAttr       => 'Banner',
+        SuppressEmpty => 1
     );
     $self->_parse_banners($parsed_xml);
 }
@@ -150,7 +173,16 @@ sub _url {
         $self->_api_language->{abbreviation} );
 }
 
-# parse <lanugage>.xml
+# generates the local path for full series data
+# TODO configurable path
+sub _cache_path {
+    my ($self) = @_;
+    return sprintf( CACHE_PATH,
+        File::HomeDir->my_home, $self->seriesid,
+        $self->_api_language->{abbreviation} );
+}
+
+# parse <language>.xml
 sub _parse_series_data {
     my ( $self, $xml ) = @_;
 
@@ -212,7 +244,7 @@ WebService::TVDB::Series - Represents a TV Series
 
 =head1 VERSION
 
-version 1.120740
+version 1.122460
 
 =head1 ATTRIBUTES
 

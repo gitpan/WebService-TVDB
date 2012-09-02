@@ -1,3 +1,9 @@
+1.122460  2012-09-02 17:41:56 Europe/London
+    Encode the POD for languages.
+    Keep a local cache of series data. [Tim De Pauw]
+    Implement a retry option when getting URL's. [Tim De Pauw]
+    Enabling SuppressEmpty for XML::Simple (sets unknown episode overviews and banner ratings to undef instead of {}). [Tim De Pauw]
+
 1.120740  2012-03-14 00:32:17 Europe/London
     Generate WebService::TVDB::Languages on build.
     Need at least Net::Ping 2.33 for testing.

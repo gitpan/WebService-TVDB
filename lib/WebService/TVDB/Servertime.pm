@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Servertime;
 {
-  $WebService::TVDB::Servertime::VERSION = '1.120740';
+  $WebService::TVDB::Servertime::VERSION = '1.122460';
 }
 
 # ABSTRACT: Gets and saves the TVDB servertime
@@ -52,7 +52,7 @@ WebService::TVDB::Servertime - Gets and saves the TVDB servertime
 
 =head1 VERSION
 
-version 1.120740
+version 1.122460
 
 =head1 SYNOPSIS
 

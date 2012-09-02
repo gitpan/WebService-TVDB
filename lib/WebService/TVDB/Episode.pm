@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Episode;
 {
-  $WebService::TVDB::Episode::VERSION = '1.120740';
+  $WebService::TVDB::Episode::VERSION = '1.122460';
 }
 
 # ABSTRACT: Represents an Episode
@@ -61,7 +61,7 @@ WebService::TVDB::Episode - Represents an Episode
 
 =head1 VERSION
 
-version 1.120740
+version 1.122460
 
 =head1 ATTRIBUTES
 
