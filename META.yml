@@ -25,7 +25,6 @@ requires:
   Exporter: 0
   File::Basename: 0
   File::HomeDir: 0
-  File::Homedir: 0
   File::Path: 0
   LWP::Simple: 0
   Object::Tiny: 0
@@ -38,4 +37,4 @@ resources:
   bugtracker: https://github.com/andrewrjones/perl5-Net-TVDB/issues
   homepage: https://github.com/andrewrjones/perl5-Net-TVDB
   repository: https://github.com/andrewrjones/perl5-Net-TVDB.git
-version: 1.122460
+version: 1.122570

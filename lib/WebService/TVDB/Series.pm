@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Series;
 {
-  $WebService::TVDB::Series::VERSION = '1.122460';
+  $WebService::TVDB::Series::VERSION = '1.122570';
 }
 
 # ABSTRACT: Represents a TV Series
@@ -14,7 +14,6 @@ use WebService::TVDB::Episode;
 use WebService::TVDB::Util qw(pipes_to_array);
 
 use Carp qw(carp);
-use File::Homedir ();
 use File::Basename qw(dirname);
 use File::Path qw(mkpath);
 use Archive::Zip qw( :ERROR_CODES :CONSTANTS );
@@ -177,6 +176,7 @@ sub _url {
 # TODO configurable path
 sub _cache_path {
     my ($self) = @_;
+    require File::HomeDir;
     return sprintf( CACHE_PATH,
         File::HomeDir->my_home, $self->seriesid,
         $self->_api_language->{abbreviation} );
@@ -244,7 +244,7 @@ WebService::TVDB::Series - Represents a TV Series
 
 =head1 VERSION
 
-version 1.122460
+version 1.122570
 
 =head1 ATTRIBUTES
 

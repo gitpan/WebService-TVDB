@@ -33,7 +33,6 @@ my %WriteMakefileArgs = (
     "Exporter" => 0,
     "File::Basename" => 0,
     "File::HomeDir" => 0,
-    "File::Homedir" => 0,
     "File::Path" => 0,
     "LWP::Simple" => 0,
     "Object::Tiny" => 0,
@@ -43,7 +42,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "1.122460",
+  "VERSION" => "1.122570",
   "test" => {
     "TESTS" => "t/*.t"
   }
