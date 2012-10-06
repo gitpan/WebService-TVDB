@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Mirror;
 {
-  $WebService::TVDB::Mirror::VERSION = '1.122570';
+  $WebService::TVDB::Mirror::VERSION = '1.122800';
 }
 
 # ABSTRACT: Gets and saves a mirror
@@ -29,7 +29,10 @@ sub fetch_mirror_list {
         die 'Need an API key';
     }
 
+    my $agent = $LWP::Simple::ua->agent;
+    $LWP::Simple::ua->agent( "WebService::TVDB/$WebService::TVDB::VERSION" );
     my $xml = LWP::Simple::get( sprintf( MIRRORS_URL, $api_key ) );
+    $LWP::Simple::ua->agent( $agent );
 
     unless ($xml) {
         die "Could not get mirrors.xml";
@@ -60,7 +63,7 @@ WebService::TVDB::Mirror - Gets and saves a mirror
 
 =head1 VERSION
 
-version 1.122570
+version 1.122800
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Series;
 {
-  $WebService::TVDB::Series::VERSION = '1.122570';
+  $WebService::TVDB::Series::VERSION = '1.122800';
 }
 
 # ABSTRACT: Represents a TV Series
@@ -81,9 +81,12 @@ sub fetch {
 
     my $url        = $self->_url;
     my $cache_path = $self->_cache_path;
+    $cache_path =~ /\A(.*)\z/s or die; $cache_path = $1; # ensure its untainted
     my $dir        = dirname($cache_path);
     -e $dir or mkpath($dir) or die 'could not create ' . $dir;
 
+    my $agent = $LWP::Simple::ua->agent;
+    $LWP::Simple::ua->agent( "WebService::TVDB/$WebService::TVDB::VERSION" );
     # get the zip
     my $res = LWP::Simple::mirror( $url, $cache_path );
     my $retries = 0;
@@ -91,7 +94,7 @@ sub fetch {
           || LWP::Simple::is_success($res)
           || $retries == $self->_max_retries )
     {
-        carp "failed get URL $url - retrying";
+        carp "failed to get URL $url: $res - retrying";
 
         # TODO configurable wait time
         sleep 1;
@@ -99,6 +102,7 @@ sub fetch {
 
         $retries++;
     }
+    $LWP::Simple::ua->agent( $agent );
     if ( $retries == $self->_max_retries ) {
         die "failed to get URL $url after $retries retries. Aborting.";
     }
@@ -244,7 +248,7 @@ WebService::TVDB::Series - Represents a TV Series
 
 =head1 VERSION
 
-version 1.122570
+version 1.122800
 
 =head1 ATTRIBUTES
 

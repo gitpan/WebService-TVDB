@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Banner;
 {
-  $WebService::TVDB::Banner::VERSION = '1.122570';
+  $WebService::TVDB::Banner::VERSION = '1.122800';
 }
 
 # ABSTRACT: Represents a Banner
@@ -44,7 +44,7 @@ WebService::TVDB::Banner - Represents a Banner
 
 =head1 VERSION
 
-version 1.122570
+version 1.122800
 
 =head1 ATTRIBUTES
 

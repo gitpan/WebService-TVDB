@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Episode;
 {
-  $WebService::TVDB::Episode::VERSION = '1.122570';
+  $WebService::TVDB::Episode::VERSION = '1.122800';
 }
 
 # ABSTRACT: Represents an Episode
@@ -44,7 +44,7 @@ use Object::Tiny qw(
 
 sub year {
     my ($self) = @_;
-    if ( $self->FirstAired =~ /^(\d{4})-\d{2}-\d{2}$/ ) {
+    if ( $self->FirstAired && $self->FirstAired =~ /^(\d{4})-\d{2}-\d{2}$/ ) {
         return $1;
     }
 }
@@ -61,7 +61,7 @@ WebService::TVDB::Episode - Represents an Episode
 
 =head1 VERSION
 
-version 1.122570
+version 1.122800
 
 =head1 ATTRIBUTES
 

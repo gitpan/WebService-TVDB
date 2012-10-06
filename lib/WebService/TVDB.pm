@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB;
 {
-  $WebService::TVDB::VERSION = '1.122570';
+  $WebService::TVDB::VERSION = '1.122800';
 }
 
 # ABSTRACT: Interface to http://thetvdb.com/
@@ -62,10 +62,12 @@ sub search {
     }
 
     my $url     = sprintf( SEARCH_URL, uri_escape($term) );
+    my $agent = $LWP::Simple::ua->agent;
+    $LWP::Simple::ua->agent( "WebService::TVDB/$WebService::TVDB::VERSION" );
     my $xml     = LWP::Simple::get($url);
     my $retries = 0;
     until ( defined $xml || $retries == $self->max_retries ) {
-        carp "failed get URL $url - retrying";
+        carp "failed to get URL $url - retrying";
 
         # TODO configurable wait time
         sleep 1;
@@ -73,6 +75,7 @@ sub search {
 
         $retries++;
     }
+    $LWP::Simple::ua->agent( $agent );
     unless ($xml) {
         die "failed to get URL $url after $retries retries. Aborting.";
     }
@@ -133,7 +136,7 @@ WebService::TVDB - Interface to http://thetvdb.com/
 
 =head1 VERSION
 
-version 1.122570
+version 1.122800
 
 =head1 SYNOPSIS
 
