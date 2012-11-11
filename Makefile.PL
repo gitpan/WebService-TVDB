@@ -16,6 +16,7 @@ my %WriteMakefileArgs = (
     "File::Find" => 0,
     "File::Temp" => 0,
     "FindBin" => 0,
+    "HTTP::Online" => 0,
     "Net::Ping" => "2.33",
     "Test::Exception" => 0,
     "Test::More" => "0.88"
@@ -42,7 +43,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "1.122800",
+  "VERSION" => "1.123160",
   "test" => {
     "TESTS" => "t/*.t"
   }

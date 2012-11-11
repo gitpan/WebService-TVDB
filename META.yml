@@ -7,6 +7,7 @@ build_requires:
   File::Find: 0
   File::Temp: 0
   FindBin: 0
+  HTTP::Online: 0
   Net::Ping: 2.33
   Test::Exception: 0
   Test::More: 0.88
@@ -37,4 +38,4 @@ resources:
   bugtracker: https://github.com/andrewrjones/perl5-Net-TVDB/issues
   homepage: https://github.com/andrewrjones/perl5-Net-TVDB
   repository: https://github.com/andrewrjones/perl5-Net-TVDB.git
-version: 1.122800
+version: 1.123160

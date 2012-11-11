@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB;
 {
-  $WebService::TVDB::VERSION = '1.122800';
+  $WebService::TVDB::VERSION = '1.123160';
 }
 
 # ABSTRACT: Interface to http://thetvdb.com/
@@ -61,9 +61,9 @@ sub search {
         $self->_load_mirrors();
     }
 
-    my $url     = sprintf( SEARCH_URL, uri_escape($term) );
+    my $url = sprintf( SEARCH_URL, uri_escape($term) );
     my $agent = $LWP::Simple::ua->agent;
-    $LWP::Simple::ua->agent( "WebService::TVDB/$WebService::TVDB::VERSION" );
+    $LWP::Simple::ua->agent("WebService::TVDB/$WebService::TVDB::VERSION");
     my $xml     = LWP::Simple::get($url);
     my $retries = 0;
     until ( defined $xml || $retries == $self->max_retries ) {
@@ -75,7 +75,7 @@ sub search {
 
         $retries++;
     }
-    $LWP::Simple::ua->agent( $agent );
+    $LWP::Simple::ua->agent($agent);
     unless ($xml) {
         die "failed to get URL $url after $retries retries. Aborting.";
     }
@@ -136,7 +136,7 @@ WebService::TVDB - Interface to http://thetvdb.com/
 
 =head1 VERSION
 
-version 1.122800
+version 1.123160
 
 =head1 SYNOPSIS
 

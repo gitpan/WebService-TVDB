@@ -42,6 +42,7 @@
             "File::Find" : 0,
             "File::Temp" : 0,
             "FindBin" : 0,
+            "HTTP::Online" : 0,
             "Net::Ping" : "2.33",
             "Test::Exception" : 0,
             "Test::More" : "0.88"
@@ -60,6 +61,6 @@
          "web" : "https://github.com/andrewrjones/perl5-Net-TVDB"
       }
    },
-   "version" : "1.122800"
+   "version" : "1.123160"
 }
 

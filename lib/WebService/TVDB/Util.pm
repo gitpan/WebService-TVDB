@@ -1,6 +1,6 @@
 package WebService::TVDB::Util;
 {
-  $WebService::TVDB::Util::VERSION = '1.122800';
+  $WebService::TVDB::Util::VERSION = '1.123160';
 }
 
 use strict;
@@ -52,7 +52,7 @@ WebService::TVDB::Util - Utility functions
 
 =head1 VERSION
 
-version 1.122800
+version 1.123160
 
 =head1 SYNOPSIS
 
