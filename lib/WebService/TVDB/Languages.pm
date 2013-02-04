@@ -1,6 +1,6 @@
 package WebService::TVDB::Languages;
 {
-  $WebService::TVDB::Languages::VERSION = '1.123160';
+  $WebService::TVDB::Languages::VERSION = '1.130350';
 }
 
 use strict;
@@ -144,7 +144,7 @@ WebService::TVDB::Languages - A list of languages supported by thetvdb.com
 
 =head1 VERSION
 
-version 1.123160
+version 1.130350
 
 =head1 SYNOPSIS
 
@@ -152,7 +152,7 @@ version 1.123160
 
 =head1 DESCRIPTION
 
-This contains all the languages supported by http://thetvdb.com as of 2012-11-11.
+This contains all the languages supported by http://thetvdb.com as of 2013-02-04.
 
 They are as follows:
 
@@ -260,7 +260,7 @@ Andrew Jones <andrew@arjones.co.uk>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Andrew Jones.
+This software is copyright (c) 2013 by Andrew Jones.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Series;
 {
-  $WebService::TVDB::Series::VERSION = '1.123160';
+  $WebService::TVDB::Series::VERSION = '1.130350';
 }
 
 # ABSTRACT: Represents a TV Series
@@ -125,7 +125,7 @@ sub fetch {
     }
     $parsed_xml = XML::Simple::XMLin(
         $xml,
-        ForceArray    => ['Data'],
+        ForceArray    => [ 'Data', 'Episode' ],
         KeyAttr       => 'Data',
         SuppressEmpty => 1
     );
@@ -202,11 +202,13 @@ sub _parse_series_data {
         }
     }
 
-    # populate Episodes
+    # populate Episodes, if they exist
     my @episodes;
-    for ( @{ $xml->{Episode} } ) {
-        push @episodes, WebService::TVDB::Episode->new( %{$_} );
+    if ( $xml->{Episode} ) {
+        for ( @{ $xml->{Episode} } ) {
+            push @episodes, WebService::TVDB::Episode->new( %{$_} );
 
+        }
     }
     $self->{episodes} = \@episodes;
     return $self->{episodes};
@@ -250,7 +252,7 @@ WebService::TVDB::Series - Represents a TV Series
 
 =head1 VERSION
 
-version 1.123160
+version 1.130350
 
 =head1 ATTRIBUTES
 
@@ -372,7 +374,7 @@ Andrew Jones <andrew@arjones.co.uk>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Andrew Jones.
+This software is copyright (c) 2013 by Andrew Jones.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

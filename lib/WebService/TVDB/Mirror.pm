@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Mirror;
 {
-  $WebService::TVDB::Mirror::VERSION = '1.123160';
+  $WebService::TVDB::Mirror::VERSION = '1.130350';
 }
 
 # ABSTRACT: Gets and saves a mirror
@@ -63,7 +63,7 @@ WebService::TVDB::Mirror - Gets and saves a mirror
 
 =head1 VERSION
 
-version 1.123160
+version 1.130350
 
 =head1 SYNOPSIS
 
@@ -91,7 +91,7 @@ Andrew Jones <andrew@arjones.co.uk>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Andrew Jones.
+This software is copyright (c) 2013 by Andrew Jones.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

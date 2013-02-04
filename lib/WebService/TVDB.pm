@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB;
 {
-  $WebService::TVDB::VERSION = '1.123160';
+  $WebService::TVDB::VERSION = '1.130350';
 }
 
 # ABSTRACT: Interface to http://thetvdb.com/
@@ -95,6 +95,34 @@ sub search {
     return $self->{series};
 }
 
+sub get {
+    my ( $self, $id ) = @_;
+
+    die 'id is required' unless $id;
+    unless ( $self->{mirrors} ) {
+        $self->_load_mirrors();
+    }
+
+    $self->{series} = _parse_series(
+        {
+            Series => [
+                {
+                    seriesid => $id,
+                    language => $languages->{ $self->language }->{abbreviation},
+                }
+            ]
+        },
+        $self->api_key,
+        $languages->{ $self->language },
+        $self->{mirrors},
+        $self->max_retries
+    );
+
+    $self->{series}->[0]->fetch();
+
+    return $self->{series}->[0];
+}
+
 # parse the series xml and return an array of WebService::TVDB::Series
 sub _parse_series {
     my ( $xml, $api_key, $api_language, $api_mirrors, $max_retries ) = @_;
@@ -136,7 +164,7 @@ WebService::TVDB - Interface to http://thetvdb.com/
 
 =head1 VERSION
 
-version 1.123160
+version 1.130350
 
 =head1 SYNOPSIS
 
@@ -147,7 +175,7 @@ version 1.123160
   my $series = @{$series_list}[0];
   # $series is a WebService::TVDB::Series
   say $series->SeriesName;
-  say $series->overview;
+  say $series->Overview;
 
   # fetches full series data
   $series->fetch();
@@ -172,6 +200,16 @@ version 1.123160
     say $banner->Rating;
     say $banner->url;
   }
+
+  # can also get by id
+  my $series = $tvdb->get(76213);
+
+  # already done a fetch()
+
+  say $series->SeriesName;
+  say $series->Overview;
+  say $series->Rating;
+  say $series->Status;
 
 =head1 DESCRIPTION
 
@@ -203,6 +241,10 @@ The amount of times we will try to get the series if our call to the URL failes.
 
 Searches the TVDB and returns a list of L<WebService::TVDB::Series> as the result.
 
+=head2 get( $id )
+
+Get a single L<WebService::TVDB::Series> by series id.
+
 =head1 API KEY
 
 To use this module, you will need an API key from http://thetvdb.com/?tab=apiregister.
@@ -215,7 +257,7 @@ Andrew Jones <andrew@arjones.co.uk>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Andrew Jones.
+This software is copyright (c) 2013 by Andrew Jones.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

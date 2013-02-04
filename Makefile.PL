@@ -12,14 +12,13 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "Interface to http://thetvdb.com/",
   "AUTHOR" => "Andrew Jones <andrew\@arjones.co.uk>",
   "BUILD_REQUIRES" => {
-    "English" => 0,
     "File::Find" => 0,
     "File::Temp" => 0,
     "FindBin" => 0,
     "HTTP::Online" => 0,
     "Net::Ping" => "2.33",
     "Test::Exception" => 0,
-    "Test::More" => "0.88"
+    "Test::More" => 0
   },
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
@@ -43,7 +42,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "1.123160",
+  "VERSION" => "1.130350",
   "test" => {
     "TESTS" => "t/*.t"
   }
