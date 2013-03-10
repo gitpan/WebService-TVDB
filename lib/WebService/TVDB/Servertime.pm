@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Servertime;
 {
-  $WebService::TVDB::Servertime::VERSION = '1.130350';
+  $WebService::TVDB::Servertime::VERSION = '1.130690';
 }
 
 # ABSTRACT: Gets and saves the TVDB servertime
@@ -12,7 +12,7 @@ use XML::Simple qw(:strict);
 use LWP::Simple;
 
 use constant SERVERTIME_URL =>
-  'http://www.thetvdb.com/api/Updates.php?type=none';
+  'http://thetvdb.com/api/Updates.php?type=none';
 
 sub new {
     my $class = shift;
@@ -52,7 +52,7 @@ WebService::TVDB::Servertime - Gets and saves the TVDB servertime
 
 =head1 VERSION
 
-version 1.130350
+version 1.130690
 
 =head1 SYNOPSIS
 

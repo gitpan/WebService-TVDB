@@ -1,6 +1,6 @@
 package WebService::TVDB::Languages;
 {
-  $WebService::TVDB::Languages::VERSION = '1.130350';
+  $WebService::TVDB::Languages::VERSION = '1.130690';
 }
 
 use strict;
@@ -69,6 +69,11 @@ our $languages = {
     'name' => 'Italiano',
     'id' => '15',
     'abbreviation' => 'it'
+  },
+  'ALL' => {
+    'name' => '(All)',
+    'abbreviation' => 'all',
+    'id' => 0
   },
   'Hrvatski' => {
     'name' => 'Hrvatski',
@@ -144,7 +149,7 @@ WebService::TVDB::Languages - A list of languages supported by thetvdb.com
 
 =head1 VERSION
 
-version 1.130350
+version 1.130690
 
 =head1 SYNOPSIS
 
@@ -152,7 +157,7 @@ version 1.130350
 
 =head1 DESCRIPTION
 
-This contains all the languages supported by http://thetvdb.com as of 2013-02-04.
+This contains all the languages supported by http://thetvdb.com as of 2013-03-10.
 
 They are as follows:
 
@@ -201,6 +206,10 @@ English
 =item *
 
 Italiano
+
+=item *
+
+ALL
 
 =item *
 

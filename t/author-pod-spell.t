@@ -34,7 +34,6 @@ WebService
 TVDB
 Util
 Languages
-Mirror
 Actor
 Series
 Banner
