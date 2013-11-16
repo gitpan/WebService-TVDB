@@ -1,6 +1,6 @@
 package WebService::TVDB::Util;
 {
-  $WebService::TVDB::Util::VERSION = '1.130690';
+  $WebService::TVDB::Util::VERSION = '1.133200';
 }
 
 use strict;
@@ -42,9 +42,11 @@ sub get_api_key_from_file {
     };
 }
 
-
+__END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -52,7 +54,7 @@ WebService::TVDB::Util - Utility functions
 
 =head1 VERSION
 
-version 1.130690
+version 1.133200
 
 =head1 SYNOPSIS
 
@@ -80,7 +82,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

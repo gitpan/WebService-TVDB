@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Banner;
 {
-  $WebService::TVDB::Banner::VERSION = '1.130690';
+  $WebService::TVDB::Banner::VERSION = '1.133200';
 }
 
 # ABSTRACT: Represents a Banner
@@ -34,9 +34,11 @@ sub url {
 
 1;
 
-
+__END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -44,7 +46,7 @@ WebService::TVDB::Banner - Represents a Banner
 
 =head1 VERSION
 
-version 1.130690
+version 1.133200
 
 =head1 ATTRIBUTES
 
@@ -90,7 +92,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Episode;
 {
-  $WebService::TVDB::Episode::VERSION = '1.130690';
+  $WebService::TVDB::Episode::VERSION = '1.133200';
 }
 
 # ABSTRACT: Represents an Episode
@@ -51,9 +51,11 @@ sub year {
 
 1;
 
-
+__END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -61,7 +63,7 @@ WebService::TVDB::Episode - Represents an Episode
 
 =head1 VERSION
 
-version 1.130690
+version 1.133200
 
 =head1 ATTRIBUTES
 
@@ -141,7 +143,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

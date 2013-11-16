@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB;
 {
-  $WebService::TVDB::VERSION = '1.130690';
+  $WebService::TVDB::VERSION = '1.133200';
 }
 
 # ABSTRACT: Interface to http://thetvdb.com/
@@ -57,8 +57,8 @@ sub search {
         die 'search term is required';
     }
 
-    my $url = sprintf( SEARCH_URL, uri_escape($term),
-        $languages->{ $self->language }->{ abbreviation } );
+    my $url = sprintf( SEARCH_URL,
+        uri_escape($term), $languages->{ $self->language }->{abbreviation} );
     my $agent = $LWP::Simple::ua->agent;
     $LWP::Simple::ua->agent("WebService::TVDB/$WebService::TVDB::VERSION");
     my $xml     = LWP::Simple::get($url);
@@ -136,9 +136,11 @@ sub _parse_series {
 
 1;
 
-
+__END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -146,7 +148,7 @@ WebService::TVDB - Interface to http://thetvdb.com/
 
 =head1 VERSION
 
-version 1.130690
+version 1.133200
 
 =head1 SYNOPSIS
 
@@ -237,6 +239,28 @@ You can pass this key into the constructor, or save it to ~/.tvdb.
 
 Andrew Jones <andrew@arjones.co.uk>
 
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item *
+
+Andrew Jones <andrew@andrew-jones.com>
+
+=item *
+
+Andrew Jones <andrewjones86@googlemail.com>
+
+=item *
+
+Fayland Lam <fayland@gmail.com>
+
+=item *
+
+Tim De Pauw <tim@pwnt.be>
+
+=back
+
 =head1 COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2013 by Andrew Jones.
@@ -245,7 +269,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

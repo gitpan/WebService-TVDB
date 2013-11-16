@@ -3,7 +3,7 @@ use warnings;
 
 package WebService::TVDB::Servertime;
 {
-  $WebService::TVDB::Servertime::VERSION = '1.130690';
+  $WebService::TVDB::Servertime::VERSION = '1.133200';
 }
 
 # ABSTRACT: Gets and saves the TVDB servertime
@@ -11,8 +11,7 @@ package WebService::TVDB::Servertime;
 use XML::Simple qw(:strict);
 use LWP::Simple;
 
-use constant SERVERTIME_URL =>
-  'http://thetvdb.com/api/Updates.php?type=none';
+use constant SERVERTIME_URL => 'http://thetvdb.com/api/Updates.php?type=none';
 
 sub new {
     my $class = shift;
@@ -42,9 +41,11 @@ sub get_servertime {
 
 1;
 
-
 __END__
+
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -52,7 +53,7 @@ WebService::TVDB::Servertime - Gets and saves the TVDB servertime
 
 =head1 VERSION
 
-version 1.130690
+version 1.133200
 
 =head1 SYNOPSIS
 
@@ -90,4 +91,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

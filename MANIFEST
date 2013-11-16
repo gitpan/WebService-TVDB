@@ -17,6 +17,7 @@ lib/WebService/TVDB/Servertime.pm
 lib/WebService/TVDB/Util.pm
 perlcritic.rc
 t/00-compile.t
+t/000-report-versions-tiny.t
 t/05_actor.t
 t/05_banner.t
 t/05_episode.t
@@ -27,7 +28,7 @@ t/05_tvdb.t
 t/05_util.t
 t/10_live.t
 t/author-critic.t
-t/author-pod-spell.t
+t/release-changes_has_content.t
 t/release-kwalitee.t
 t/release-no-smart-comments.t
 t/release-no-tabs.t

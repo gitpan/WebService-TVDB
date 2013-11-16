@@ -11,15 +11,7 @@ use ExtUtils::MakeMaker 6.30;
 my %WriteMakefileArgs = (
   "ABSTRACT" => "Interface to http://thetvdb.com/",
   "AUTHOR" => "Andrew Jones <andrew\@arjones.co.uk>",
-  "BUILD_REQUIRES" => {
-    "File::Find" => 0,
-    "File::Temp" => 0,
-    "FindBin" => 0,
-    "HTTP::Online" => 0,
-    "Net::Ping" => "2.33",
-    "Test::Exception" => 0,
-    "Test::More" => 0
-  },
+  "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
@@ -42,24 +34,52 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "1.130690",
+  "TEST_REQUIRES" => {
+    "File::Spec" => 0,
+    "FindBin" => 0,
+    "HTTP::Online" => 0,
+    "IO::Handle" => 0,
+    "IPC::Open3" => 0,
+    "Net::Ping" => "2.33",
+    "Test::Exception" => 0,
+    "Test::More" => "0.88"
+  },
+  "VERSION" => "1.133200",
   "test" => {
     "TESTS" => "t/*.t"
   }
 );
 
 
-unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
-  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
-  my $pp = $WriteMakefileArgs{PREREQ_PM};
-  for my $mod ( keys %$br ) {
-    if ( exists $pp->{$mod} ) {
-      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
-    }
-    else {
-      $pp->{$mod} = $br->{$mod};
-    }
-  }
+my %FallbackPrereqs = (
+  "Archive::Zip" => 0,
+  "Carp" => 0,
+  "Exporter" => 0,
+  "File::Basename" => 0,
+  "File::HomeDir" => 0,
+  "File::Path" => 0,
+  "File::Spec" => 0,
+  "FindBin" => 0,
+  "HTTP::Online" => 0,
+  "IO::Handle" => 0,
+  "IPC::Open3" => 0,
+  "LWP::Simple" => 0,
+  "Net::Ping" => "2.33",
+  "Object::Tiny" => 0,
+  "Test::Exception" => 0,
+  "Test::More" => "0.88",
+  "URI::Escape" => 0,
+  "XML::Simple" => 0,
+  "constant" => 0,
+  "strict" => 0,
+  "warnings" => 0
+);
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  delete $WriteMakefileArgs{TEST_REQUIRES};
+  delete $WriteMakefileArgs{BUILD_REQUIRES};
+  $WriteMakefileArgs{PREREQ_PM} = \%FallbackPrereqs;
 }
 
 delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
